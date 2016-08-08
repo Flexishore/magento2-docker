@@ -1,0 +1,60 @@
+version: '2'
+
+services:
+  sources:
+      image: busybox
+      volumes:
+          - /home/docker/data/docker:/var/www
+  data:
+      image: busybox
+      volumes:
+          - /var/www/var/cache
+          - /var/www/var/logs
+          - /data/db
+
+  redis:
+      image: redis:3.2
+      volumes_from:
+          - data
+
+  db:
+      image: mariadb:10.0
+      environment:
+          - MYSQL_ROOT_PASSWORD=root
+          - MYSQL_USER=flexishore
+          - MYSQL_PASSWORD=flexishore
+          - MYSQL_DATABASE=flexishore
+      volumes:
+          - ${HOME_DIR}/data:/docker-entrypoint-initdb.d
+          - ${HOME_DIR}/data/mysql:/var/lib/mysql
+      volumes_from:
+          - data
+      ports:
+          - "3306"
+
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      links:
+          - db
+      ports:
+          - "8080:80"
+
+  phpfpm:
+    build:
+      context: ./docker/phpfpm
+    volumes:
+      - ${HOME_DIR}/src:/app
+    links:
+      - redis
+
+  nginx:
+    image: bitnami/nginx
+    links:
+      - phpfpm:docker
+      - db
+      - redis
+    volumes:
+      - ${HOME_DIR}/docker/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf
+      - ${HOME_DIR}/src:/app
+    ports:
+      - "80:80"
