@@ -13,7 +13,7 @@ That's all! Your application should be working on `yourapp.com`.
 PhpMyAdmin can be accessed by `yourapp.com:8080` (you can
 make there changes in your _core_config_data_ table.
 
-!! Do not forget to add `yourapp.com` to your _hosts_ file with this line :
+**Do not forget** to add `yourapp.com` to your _hosts_ file with this line :
 `DOCKER_MACHINE_IP yourapp.com`
  
  To check IP run this command : _docker-machine ip_
