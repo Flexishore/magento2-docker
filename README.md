@@ -8,7 +8,9 @@ Magento 2 stack based on Docker : Magento 2, PHP 7, Nginx, Mariadb 10.1, Redis 3
 4. Change your `HOME_DIR` in `.env` file. If you are working on Windows please check this [link](https://blog.pavelsklenar.com/5-useful-docker-tip-and-tricks-on-windows/)
 5. Run _docker-compose up -d_
 
-That's all! Your application should be working on `yourapp.com`. PhpMyAdmin can be accessed by `yourapp.com:8080` (you can
+That's all! Your application should be working on `yourapp.com`. 
+
+PhpMyAdmin can be accessed by `yourapp.com:8080` (you can
 make there changes in your _core_config_data_ table.
 
 !! Do not forget to add `yourapp.com` to your _hosts_ file with this line :
@@ -18,6 +20,7 @@ make there changes in your _core_config_data_ table.
  
  ## Using custom domain
  To use another domain name instead of `yourapp.com` plase change this line `NGINX_HOST=yourapp.com` in _.env_ file. 
+ 
  After change run `docker-compose up -d`.
  
  ## Redis as session storage
