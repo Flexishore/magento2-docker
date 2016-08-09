@@ -16,6 +16,10 @@ make there changes in your _core_config_data_ table.
  
  To check IP run this command : _docker-machine ip_
  
+ ## Using custom domain
+ To use another domain name instead of `yourapp.com` plase change this line `NGINX_HOST=yourapp.com` in _.env_ file. 
+ After change run `docker-compose up -d`.
+ 
  ## Redis as session storage
  To store sessions in redis use this sample configuration :
  ```
