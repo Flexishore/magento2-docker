@@ -43,18 +43,19 @@ services:
     build:
       context: ./docker/phpfpm
     volumes:
-      - ${HOME_DIR}/src:/app
+      - ${HOME_DIR}/src:/usr/src/myapp
     links:
       - redis
 
   nginx:
-    image: bitnami/nginx
+    image: nginx:1.11
     links:
       - phpfpm:docker
       - db
       - redis
     volumes:
-      - ${HOME_DIR}/docker/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf
-      - ${HOME_DIR}/src:/app
+      - ${HOME_DIR}/docker/vhost.conf:/etc/nginx/conf.d/app.conf.template
+      - ${HOME_DIR}/src:/usr/src/myapp
     ports:
       - "80:80"
+    command: /bin/bash -c "envsubst '$$NGINX_HOST' < /etc/nginx/conf.d/app.conf.template > /etc/nginx/conf.d/app.conf && nginx -g 'daemon off;'"
