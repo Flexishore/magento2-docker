@@ -14,14 +14,22 @@ PhpMyAdmin can be accessed by `yourapp.com:8080` (you can
 make there changes in your _core_config_data_ table.
 
 **Do not forget** to add `yourapp.com` to your _hosts_ file with this line :
-`DOCKER_MACHINE_IP yourapp.com`
+```
+DOCKER_MACHINE_IP yourapp.com
+```
  
- To check IP run this command : _docker-machine ip_
+ To check IP run this command : 
+ ```
+ docker-machine ip
+ ```
  
  ## Using custom domain
- To use another domain name instead of `yourapp.com` plase change this line `NGINX_HOST=yourapp.com` in _.env_ file. 
+ To use another domain name instead of `yourapp.com` plase change this line `NGINX_HOST=yourapp.com` in `.env` file. 
  
- After change run `docker-compose up -d`.
+ After change run 
+ ```
+ docker-compose up -d
+ ```
  
  ## Redis as session storage
  To store sessions in redis use this sample configuration :
