@@ -12,6 +12,12 @@ services:
           - /var/www/var/logs
           - /data/db
 
+  elasticsearch:
+      build:
+        context: ./docker/elasticsearch
+      volumes:
+        - ${HOME_DIR}/data/elasticsearch:/usr/share/elasticsearch/data
+
   redis:
       image: redis:3.2
       volumes_from:
@@ -53,6 +59,7 @@ services:
       - phpfpm:docker
       - db
       - redis
+      -elasticsearch
     volumes:
       - ${HOME_DIR}/docker/vhost.conf:/etc/nginx/conf.d/app.conf.template
       - ${HOME_DIR}/src:/usr/src/myapp
